@@ -1,0 +1,61 @@
+\section{Background}
+\label{ch:background}
+
+This chapter serves to explain the foundations of natural language processing (NLP), especially the subpart of
+language modeling, needed to understand the problem and methodology used in this thesis. The two main building blocks
+of this thesis are the examination of a state-of-the-art language model (LM) and its ability to generate high quality,
+human-like text on the one hand and methods to distinguish such generations from human written text on the other hand.
+In order to understand the problem and methodology used in this thesis, this chapter explains the foundations
+of NLP (ch.~\ref{sec:history_of_language_modeling}), especially the subpart of language
+modeling, and the foundations of deep learning (ch.~\ref{sec:deep_learning}) especially under the aspect of sequence
+classification.
+
+\subsection{History of language modeling}
+\label{sec:history_of_language_modeling}
+
+Natural language processing (NLP) is “an area of research and application that explores how computers can be used to
+understand and manipulate natural language text or speech to do useful things”~\footcite{doi:10.1002/aris.1440370103}.
+The applications of NLP such as speech recognition, sentiment analysis,
+question answering and others are numerous~\footcite{DBLP:journals/corr/GattK17}.
+Moreover, these applications are already being heavily used by industry and
+consumers alike e.g. in the forms of digital voice assistants, sentiment analysis for recommender systems
+and browser search bars~\footcite{8012330,10.1145/3064663.3064672,GoogleSearch}. The subcomponent of NLP
+needed when it comes to tasks like machine translation, predictive typing or summarization that involve either
+generating text or estimating the probability of text is called language modeling. The following notation mostly
+follows the one from the CS224 Stanford Natural Language Processing with Deep Learning lecutre by Chris Manning.
+
+Language modeling is the task of predicting what word comes next. More formally, this means:
+Given a sequence of words $ x^{(1)}, x^{(2)}, \dots, x^{(t)} $, compute the probability of the next word $ x^{(t+1)} $:
+\begin{equation}
+    P(x^{(t+1)} | x^{(t)}, \dots, x^{(1)})
+\end{equation}
+where $ x^{(t+1)} $ can be any word in the vocabulary $ V = \{w_1, \dots, w_{|V|}\} $  \\
+Having a system that does allows us to assign a probability to a snippet of text of length $ T $:
+\begin{align}
+    \begin{split}
+    P(x^{(1)}, \dots, x^{(T)}) &= P(x^{(1)}) \times P(x^{(2)} | x^{(1)}) \times \cdots \times P(x^{(T)} | x^{(T-1)}, \dots, x^{(1)}) \\
+    &= \prod_{t=1}^{T} P(x^{(t)} | x^{(t-1)}, \dots, x^{(1)})
+    \end{split}
+\end{align}
+Developing and improving language models is a task central to language understanding by which we can measure how well
+machine learning systems actually comprehend natural language [cite either stanford or ice paper 3 or 4].
+This is demonstrated by the fact that “often (although not always), training better language models improves the
+underlying metrics of the downstream task (such as word error rate for speech recognition, or BLEU
+score for translation), which makes the task of training better
+LMs valuable by itself”~\footcite{jozefowicz2016exploring}. \\
+Since the first significant language model was proposed back in 1980~\footcite{880083}, language models and their
+architectures have gone through many changes. Especially the rise of Deep Learning and new network models such as RNNs
+or Transformers have fueled language modeling research in the past few years. The following chapters will cover the
+most common model types, heuristics and architectures (ch. 2.1.1 - 2.1.3 [STILL HARDCODED]).
+
+
+\input{sec/history-of-lm/word-representation.tex}
+
+\input{sec/history-of-lm/n-gram-models.tex}
+
+\input{sec/history-of-lm/neural-language-models.tex}
+
+\subsection{Deep Learning}
+\label{sec:deep_learning}
+
+This is deep learning.

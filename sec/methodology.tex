@@ -1,0 +1,46 @@
+\section{Methodology}
+\label{ch:methodology}
+
+This chapter explains the methodology.
+
+\subsection{Dataset}
+\label{sec:dataset}
+
+In order to create a dataset suited for the classification task a few aspects had to be considered. \\
+As deep learning methods were going to be used for the classification task, many labeled training samples 
+were going to be needed [citation for the need of much training data]. The dataset should ideally be comprised 
+of equal amounts of synthetically and human generated texts in order to improve the accuracy of training.
+
+The first idea was to look for already built datasets that are freely available as these would not only reduce 
+the time and amount of work needed for the creation of the dataset, but also provide a benchmark against other 
+models used on them. Because the examined classification task is fairly novel and powerful language models have 
+just started to emerge in recent years [citation], there is a lack of standardized data sets - prior research 
+often focused on detection of artificially generated academic papers instead of short texts 
+[reference to papers that use academic papers]. Furthermore, the incentive of using metadata related to text 
+snippets led to the motivation of building a new dataset.
+
+For this purpose, the following sources of human created text were inspected - taking different aspects like 
+data availability, extensibility by metadata, potential for use of text generation and minimal overlap with the 
+pretrained GPT2-XL Model (1.5B Parameters) into account:
+
+\begin{itemize}
+    \item Wikipedia
+    \item Twitter
+    \item Reviews (e.g. Amazon, IMDb)
+    \item Reddit Comments
+    \item Reuters Corpus
+\end{itemize}
+
+[insert table with different aspects considered]
+
+With everything taken into consideration, Wikipedia articles were chosen as the best fit for this work. 
+Especially the fact that OpenAI did explicitly not train their model on any Wikipedia article [cite the gpt2 paper] 
+and the ease of accessibility to large amounts of (meta-)data led to this conclusion.
+
+\input{sec/dataset/data_extraction.tex}
+
+\subsection{Approach}
+\label{sec:approach}
+
+\subsection{Infrastructure}
+\label{sec:infrastructure}
