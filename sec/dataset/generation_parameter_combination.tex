@@ -1,0 +1,49 @@
+\subsubsection{Generation Parameter Combination}
+\label{sub:generation_parameter_combination}
+
+The output style of GPT2 differs depending on the chosen parameter combination. The parameters that influence the produced output the most are:
+\begin{itemize}
+    \item Input length
+    \item Maximum output length
+    \item Temperature - a higher value produces a softer probability distribution over classes which leads to “crazier” or more unlikely text, 
+    whereas a lower value does the opposite [cite Hinton Paper no. 23]
+    \item Repetition Penalty
+\end{itemize}
+
+In order to determine a parameter combination that generates convincing text all possible permutations between the parameters given the values 
+listed in [ref table] were used to generate samples for 50 articles. As a metric for evaluation a fine-tuned large (1.5GB weights size as a .pt file) 
+RoBERTa-based model with a mixture of temperature 1 and nucleus sampling outputs was chosen. This configuration was elected as it generalizes well 
+to outputs generated using different sampling methods [citation gpt2 paper]. On top of that, human evaluation was performed while reading through 
+samples created by the best performing parameter combinations according to the RoBERTa evaluation. \\
+The main findings were that a higher repetition penalty as well as shorter output length were key factors for better text generation. In 
+addition to that, choosing a lower temperature such as [cite Harvard paper] and feeding the LM word split input sentences as opposed to 
+character split input sequences (“tennis is a sport” instead of “tennis is a spo”) also improved quality.
+
+[show examples]
+
+The finally selected parameter values were:
+
+\paragraph*{Maximum Input Length - 60 characters}
+The input that was fed into GPT-2 XL was the first sequence of plain text in a Wikipedia article, i.e. no infobox or content table text was 
+considered. Additionally, before feeding the 60 character String into the LM it was split at the last word. This was done because the quality 
+of the generated output tended to increase when input was given in full words rather than in characters and thus having many times split words.
+
+\paragraph*{Maximum Output Length - 50 Tokens}
+This corresponds to an average of about 240 - 260 characters per text (in comparison: the max tweet length is 280 characters). As this is a 
+size that occurs a lot especially in social media or breaking news headlines (with the subtitle), the focus was placed on shorter text 
+snippets [cite techcrunch and socialreport]. 
+[insert figure that shows average character length per platform that achieves the best ‘virality’]
+
+\paragraph*{Temperature - 1.0}
+Both lowering and increasing (to 0.7 and 1.3) the temperature led to an increased detection of synthetically generated text, which is why 
+the temperature was left at its original value.
+
+\paragraph*{Repetition Penalty - 1.3}
+As repetitions were not desired in the generated output the repetition penalty was increased from its default value of 1.0 to 1.3. Under the 
+assumption that most Wikipedia articles do not contain repetitions (especially in their abstracts) unlike for instance dramatic text, where text 
+repetition can be used as a stylistic device.
+
+\paragraph*{Number of beams - 5}
+Initially thought of as a parameter that would have a big impact on the quality of the generated text, it was found out that altering the number 
+of beams used in the beam sampling strategy when predicting the next most probable tokens was had only little impact on the LM text generation. 
+The values chosen ranged between 5 and 10 as this is currently the de facto standard [cite Stanford lectures] in research.

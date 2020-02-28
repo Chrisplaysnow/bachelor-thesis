@@ -1,0 +1,13 @@
+\subsubsection{Data Building}
+\label{sub:data_building}
+
+After downloading the Wikipedia dumps the natural text was extracted via the wikiextractor [reference] library (filtering out 
+texts with a character length less than 1000) and the metadata was extracted and parsed by using SAX Parser (“Simple Api for XML”) 
+[reference]. In order to finalize the data set creation, synthetic text had to be generated for each article’s first 60 characters twice. 
+The double generation was performed in order to select the sample that GPT-2 felt more confident on and improve the data set quality.
+
+Given the aforementioned parameter configurations and using the free Google Colaboratory platform [ref Google Colab] which provides 
+users with a free GPU (Nvidia Tesla K80 link) the text generation of a single sample took about 5 to 6 seconds. \\
+Completing the data set with approximately 100.000 entries, thus, took about 11 days.
+
+The finalized JSON format of a datapoint pair is shown in [Figure 10 - json format of 1 example]. \\
