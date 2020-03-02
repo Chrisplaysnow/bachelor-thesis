@@ -3,9 +3,9 @@
 #
 # Examples:
 #
-pdflatex main.tex
+lualatex main.tex
 # Bibliography
 bibtex main.aux
 # Resolve cross-references
-pdflatex main.tex
-pdflatex main.tex
+lualatex main.tex
+lualatex main.tex
