@@ -10,4 +10,7 @@
 *.blg
 *.out
 *.toc
+*.lot
+*.xmpi
+*.lof
 img

@@ -1,4 +1,4 @@
-\documentclass[twoside, type=msc,colorback,accentcolor=tud1b, 11pt, numbersubsubsec]{tudthesis}
+\documentclass[twoside, type=bsc,colorback,accentcolor=tud1b, 11pt, numbersubsubsec]{tudthesis}
 \usepackage[german]{babel}
 \usepackage{mathtools}
 \usepackage{graphicx}
@@ -11,6 +11,9 @@
 \usepackage{amsmath}
 \usepackage{todonotes}
 \usepackage{booktabs}
+% \usepackage{helvet}
+% \setsansfont[Ligatures=TeX]{helvet}
+% \setmainfont{helvet}
 
 \mdfsetup{nobreak=true}
 \mdtheorem{definition}{Definition}
@@ -46,31 +49,31 @@
 \parskip=2mm
 
 \begin{document}
-\thesistitle{Using Deep Learning Methods to Predict Tweet Engagement Metrics}{}
+\thesistitle{This is my title}{}
 
-\author{Felix Peters}
-\birthplace{Bad Soden am Taunus}
+\author{Christopher Schütz}
+\birthplace{Münster}
 
 \department{Fachbereich Rechts- und Wirtschaftswissenschaften}
 \group{Wirtschaftsinformatik}
-\referee{Prof. Dr. Peter Buxmann}{Prof. Dr. Alexander Benlian}
+\referee{Prof. Dr. Peter Buxmann}
 
 % Start of text output
 \makethesistitle
 
 % TODO: Change
-\affidavit[24. April 2018]{Felix Peters}
+\affidavit[18. März]{Christopher Schütz}
 
 \input{sec/abstract.tex}
 
 \renewcommand{\contentsname}{Table of contents}
 \tableofcontents
 
-%\renewcommand{\listfigurename}{List of figures}
-%\listoffigures
-%
-%\renewcommand{\listtablename}{List of tables}
-%\listoftables
+\renewcommand{\listfigurename}{List of figures}
+\listoffigures
+
+\renewcommand{\listtablename}{List of tables}
+\listoftables
 
 \input{sec/intro.tex}
 
