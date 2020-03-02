@@ -7,37 +7,25 @@ This chapter explains the methodology.
 \label{sec:dataset}
 
 In order to create a dataset suited for the classification task a few aspects had to be considered. \\
-As deep learning methods were going to be used for the classification task, many labeled training samples 
-were going to be needed [citation for the need of much training data]. The dataset should ideally be comprised 
-of equal amounts of synthetically and human generated texts in order to improve the accuracy of training.
+As deep learning methods with many parameters that need to be optimized were going to be used for the classification task, many labeled training samples were needed. The dataset should ideally be comprised of equal amounts of synthetically and human generated texts in order to improve the accuracy of training.
 
 The first idea was to look for already built datasets that are freely available as these would not only reduce 
 the time and amount of work needed for the creation of the dataset, but also provide a benchmark against other 
 models used on them. Because the examined classification task is fairly novel and powerful language models have 
-just started to emerge in recent years [citation], there is a lack of standardized data sets - prior research 
+just started to emerge in recent years, there is a lack of standardized data sets - prior research 
 often focused on detection of artificially generated academic papers instead of short texts 
 [reference to papers that use academic papers]. Furthermore, the incentive of using metadata related to text 
-snippets led to the motivation of building a new dataset.
+snippets and inspecting the changes in detection accuracy through it led to the motivation of building a new dataset.
 
 For this purpose, the following sources of human created text were inspected - taking different aspects like 
 data availability, extensibility by metadata, potential for use of text generation and minimal overlap with the 
-pretrained GPT2-XL Model (1.5B Parameters) into account:
+pretrained GPT2 Model into account: Wikipedia, Twitter, reviews (e.g. Amazon, IMDb), Reddit comments, Reuters Corpus.
 
-\begin{itemize}
-    \item Wikipedia
-    \item Twitter
-    \item Reviews (e.g. Amazon, IMDb)
-    \item Reddit Comments
-    \item Reuters Corpus
-\end{itemize}
+With everything taken into consideration, Wikipedia articles were chosen as the best fit for this work.
+Reasons for this choice were the ease of access, the vast amount of data entries (currently there are more than 6 million articles in the english Wikipedia\footnote{\url{https://en.wikipedia.org/wiki/Wikipedia:Size_comparisons\#Wikipedia}}), the extensibility by metadata such as pageviews or categories and most importantly the fact that the ready-to-use GPT-2 model was explicitly not trained on any Wikipedia article since "it is a common data source for other datasets and could complicate analysis due to overlapping training data with test evalutation tasks."~\footcite{radford2019language}. \\
+The reviews and reddit comments datasets were not chosen, because the metadata was not seen as decisive in improving detection quality. The disadvantage of the Reuters Corpus was that the training dataset used for the ready-to-use GPT2 model is comprised of many newspaper sources and thus is more likely to generate results that are rathere similar to their human written counterparts. Twitter was seen as a promising data source, but the access to its public api was shut down which is why it could not be further considered.
 
-[insert table with different aspects considered]
-
-With everything taken into consideration, Wikipedia articles were chosen as the best fit for this work. 
-Especially the fact that OpenAI did explicitly not train their model on any Wikipedia article [cite the gpt2 paper] 
-and the ease of accessibility to large amounts of (meta-)data led to this conclusion.
-
-\input{sec/dataset/data_extraction.tex}
+\input{sec/dataset/extraction_process.tex}
 
 \input{sec/dataset/generation_parameter_combination.tex}
 

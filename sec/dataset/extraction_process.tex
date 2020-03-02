@@ -1,0 +1,16 @@
+\subsubsection{Extraction Process}
+\label{sub:extraction_process}
+
+The two usual ways of scraping Wikipedia articles and other data like article metadata or media files from the Wikimedia Foundation\footnote{\url{https://wikimediafoundation.org/}} are through the APIs or the database dumps provided by the MediaWiki platform\footnote{\url{https://www.mediawiki.org/wiki/MediaWiki}}.
+Both of these channels were used for different purposes:\\
+\begin{itemize}
+    \item{\textbf{Database Dumps:}} Titles, clear text and article ids were extracted using a python library called WikiExtractor\footnote{\url{https://github.com/attardi/wikiextractor}}. This tool parses the compressed and xml-formatted dumps and extracts the aforementioned fields. The output is stored in “.jsonl” (json lines) files, where each line denotes a complete JSON object.
+    \item{\textbf{Api:}} The MediaWiki Api was used to retrieve metadata such as pageviews, edits, the latest edit timestamp and namespaces (categories) linked to each article via the extracted page ids, but also to access the latest news listed in WikiNews to generate exemplary news messages.
+\end{itemize}
+
+The extension of text samples by metadata was made in order to examine the following hypotheses:\\
+1. The detection accuracy varies (significantly) across different categories.\\
+2. The higher the edits and/or views on a page are, the lower the detection accuracy will be as the human text will be more sophisticated and better worded.\\
+3. The more recent the last edit timestamp of an article is the lower the detection rate will be as newer information will be less likely to be present in the training data used for GPT-2.
+
+It should be noted that only articles with a minimum length of 1000 characters were taken into consideration in order to filter out many entries that would have diminished the quality of the dataset (e.g. entries that only have a redirect notice to another article). For each article entry the last edit timestamp, the aggregated amount of page views over the last 30 days and the namespace was retrieved.
