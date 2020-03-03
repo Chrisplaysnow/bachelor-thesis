@@ -1,1 +1,1 @@
-pdflatex main.tex
+lualatex main.tex
