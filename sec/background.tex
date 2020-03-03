@@ -22,25 +22,11 @@ consumers alike e.g. in the forms of digital voice assistants, sentiment analysi
 and browser search bars~\footcite{8012330,10.1145/3064663.3064672,GoogleSearch}. The subcomponent of NLP
 needed when it comes to tasks like machine translation, predictive typing or summarization that involve either
 generating text or estimating the probability of text is called language modeling. The following notation mostly
-follows the one from the CS224 Stanford Natural Language Processing with Deep Learning lecutre by Chris Manning~\footnote{\url{https://web.stanford.edu/class/cs224n/index.html}}.
-
-Language modeling is the task of predicting “what word comes next“. More formally, this means:
-Given a sequence of words $ x^{(1)}, x^{(2)}, \dots, x^{(t)} $, compute the probability of the next word $ x^{(t+1)} $:
-\begin{equation}
-    P(x^{(t+1)} | x^{(t)}, \dots, x^{(1)})
-\end{equation}
-where $ x^{(t+1)} $ can be any word in the vocabulary $ V = \{w_1, \dots, w_{|V|}\} $  \\
-Having a system that does allows us to assign a probability to a snippet of text of length $ T $:
-\begin{align}
-    \begin{split}
-    P(x^{(1)}, \dots, x^{(T)}) &= P(x^{(1)}) \times P(x^{(2)} | x^{(1)}) \times \cdots \times P(x^{(T)} | x^{(T-1)}, \dots, x^{(1)}) \\
-    &= \prod_{t=1}^{T} P(x^{(t)} | x^{(t-1)}, \dots, x^{(1)})
-    \end{split}
-\end{align}
-Developing and improving language models is a task central to language understanding by which we can measure how well machine learning systems actually comprehend natural language. This is demonstrated by the fact that “often (although not always), training better language models improves the underlying metrics of the downstream task (such as word error rate for speech recognition, or BLEU score for translation), which makes the task of training better LMs valuable by itself”~\footcite{DBLP:journals/corr/JozefowiczVSSW16}. \\
-Since the first significant language model was proposed back in 1980~\footcite{880083}, language models and their architectures have gone through many changes. Especially the rise of Deep Learning and new network models such as RNNs or Transformers have fueled language modeling research in the past few years. The following chapters will cover word representation as the foundation for language models (ch.~\ref{sub:word_representation}) followed by the most common and most used language model types and architectures (ch.~\ref{sub:n_gram_models} - ch.~\ref{sub:neural_language_models}).
+follows the one from the CS224 Stanford Natural Language Processing with Deep Learning lecutre by Chris Manning~\footnote{\url{https://web.stanford.edu/class/cs224n/index.html}}. The following chapters will cover word representation (ch.~\ref{sub:word_representation}) as the foundation for language models, followed by a brief explanation of the basics of language models (ch.~\ref{sub:foundations_of_language_modeling}) and will end with the most common and most used language model types and architectures (ch.~\ref{sub:n_gram_models} - ch.~\ref{sub:neural_language_models}).
 
 \input{sec/history-of-lm/word-representation.tex}
+
+\input{sec/history-of-lm/foundations-of-language-modeling.tex}
 
 \input{sec/history-of-lm/n-gram-models.tex}
 

@@ -1,0 +1,17 @@
+\subsubsection{Foundations of language modeling}
+\label{sub:foundations_of_language_modeling}
+
+As the necessary preprocessing has been dealt with, we can now get to the actual task of language modeling, which is the task of predicting “what word comes next“. More formally, this means: Given a sequence of words $ x^{(1)}, x^{(2)}, \dots, x^{(t)} $, compute the probability of the next word $ x^{(t+1)} $:
+\begin{equation}
+    P(x^{(t+1)} | x^{(t)}, \dots, x^{(1)})
+\end{equation}
+where $ x^{(t+1)} $ can be any word in the vocabulary $ V = \{w_1, \dots, w_{|V|}\} $.  \\
+Having a system that does so allows us to assign a probability to a text excerpt of length $ T $:
+\begin{align}
+    \begin{split}
+    P(x^{(1)}, \dots, x^{(T)}) &= P(x^{(1)}) \times P(x^{(2)} | x^{(1)}) \times \cdots \times P(x^{(T)} | x^{(T-1)}, \dots, x^{(1)}) \\
+    &= \prod_{t=1}^{T} P(x^{(t)} | x^{(t-1)}, \dots, x^{(1)})
+    \end{split}
+\end{align}
+Developing and improving language models is a task central to language understanding by which we can measure how well machine learning systems actually comprehend natural language. This is demonstrated by the fact that “often (although not always), training better language models improves the underlying metrics of the downstream task (such as word error rate for speech recognition, or BLEU score for translation), which makes the task of training better LMs valuable by itself”~\footcite{DBLP:journals/corr/JozefowiczVSSW16}. \\
+Since the first significant language model was proposed back in 1980~\footcite{880083}, language models and their architectures have gone through many changes. Especially the rise of deep learning and new network models such as recurrent neural networks (RNNs) or transformers have fueled language modeling research in the past few years.
