@@ -1,8 +1,4 @@
-#!/bin/bash
-# Here, you can define the steps needed to compile your LaTe
-#
-# Examples:
-#
+#!/bin/zsh
 lualatex main.tex
 # Bibliography
 bibtex main.aux
