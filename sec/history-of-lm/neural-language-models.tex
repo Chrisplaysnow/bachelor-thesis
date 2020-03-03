@@ -1,11 +1,48 @@
 \subsubsection{Neural language models}
 \label{sub:neural_language_models}
 
-\paragraph{Neural network}
-This is some text.
+Neural Net Description
+Neural networks avoid the curse of dimensionality problem (the number of possible sequences of words increases exponentially with the size of the vocabulary) that arises with language modeling by representing words in a distributed way, as non-linear combination of weights.
+
+One solution could be a fixed window neural language model:
+
+[insert graphic]
+
+This architecture foregoes the need of storing all possible n-grams. However there are other problems that remain: Firstly, the fixed window will always be too small, there still is no way of processing inputs of arbitrary length. Secondly, there is no symmetry in the processing of outputs. This means that x(1)and x(2)are multiplied by completely different weights [obwohl] their output could be correlated.
+The idea of applying the same weight matrix repeatedly leads to a new architecture called recurrent neural networks.
 
 \paragraph{Recurrent neural networks}
-This is some text.
+With their paper “Learning representations by back-propagating errors” [cite ice paper 11] from 1986, David Rumelhart, Geoffrey Hinton and Ronald Williams laid the foundations for current recurrent neural network architectures. This work showed that these networks can learn an internal ‘hidden’ state - which is neither part of the input nor the output - that represent important features of the task domain. Unlike feedforward neural networks, RNNs can use their internal state (memory) to process variable length sequences of inputs, which makes them so valuable for language modeling.
+
+[insert architecture of an rnn]
+
+There are a few benefits that arise from the RNN architecture. As the same weight matrix is used for every input, model size does not increase for longer input. Also, the model can process inputs of every length. And finally, this architecture allows for usage of information from the past and for symmetric input processing by using the same weight matrix.
+Because RNNs synthesise and reconstitute the training data in a complex way they rarely generate the same thing twice. The predictions are “therefore much better at modelling real-valued or multivariate data [rather] than exact matches” [cite ice paper 10].
+
+The core reason that recurrent nets are more exciting is that they allow us to operate over sequences of vectors: Sequences in the input, the output, or in the most general case both.
+[use karpathy images for visualization, ice paper 9]
+
+The form of RNNs that has been described so far is known as the so called “vanilla RNN”. It is the most basic form of the RNN class of artificial neural networks. Because of the heavy computations involved in adjusting the weight matrix vanilla RNNs are susceptible to the problem of vanishing gradients. To tackle the short-comings of vanilla RNNs different RNN-based architectures have been developed: LSTMs, GRUs and others.
+
+It is worth inspecting the details of Long-Short Term Memory RNNs, introduced in 1997 by Sepp Hochreiter and Jürgen Schmidhuber [ice paper 12], as their real-world usage has been crowned with success.
+
+\bigskip
+
+LSTMs
+
+Big companies like Apple, Facebook, Google and IBM have been known to use LSTM based architectures in their products [cite all the wikipedia listed references for big companies in wikipedia] for features like “smart reply” and “quicktype”.
+
+The underlying core concept of LSTMs is the introduction of the so called cell state in addition to the hidden state. This cell is used to store long-term information. The LSTM can hereby erase, write and read information from the cell.
+
+[insert formulas from stanford, pictures from “understanding lstms”]
+[explain each cell in detail with its according formulas]
+
+This architecture provides a better way for preserving information over many timesteps, because the forget gate provides a way of excluding ‘irrelevant’ information for the optimization.
+
+\bigskip
+
+GRUs
+
 
 \paragraph{Convolutional neural networks}
 This is some text.
