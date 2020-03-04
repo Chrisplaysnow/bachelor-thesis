@@ -18,7 +18,7 @@
 \usepackage{newunicodechar}
 \newunicodechar{ß}{\ss}
 % Paket xtab erm�glicht Umbrechen von langen Tabellen
-\usepackage{xtab}
+% \usepackage{xtab}
 
 % picins erlaubt das Umflie�en von Abbildungen durch Text
 % Untenstehendes renewcommand behebt den picins-bug, dass Abbildungen
@@ -196,6 +196,9 @@ pdfstartview={FitH}
 \setsansfont[Ligatures=TeX]{FrontPage-Medium.ttf}
 % \setmonofont{FrontPage-Regular.ttf}
 \selectfont
+\usepackage[toc,nopostdot,nonumberlist]{glossaries}
+\makeglossaries
+\loadglsentries[main]{glossaries}
 
 % add citations from image captions
 \makesavenoteenv{figure}
@@ -307,4 +310,4 @@ pdfstartview={FitH}
 \renewcaptionname{ngerman}\tablename{Tabelle}
 
 \addtocontents{lof}{\protect\def\protect\autodot{: }}
-\addtocontents{lot}{\protect\def\protect\autodot{: }}  
+\addtocontents{lot}{\protect\def\protect\autodot{: }}

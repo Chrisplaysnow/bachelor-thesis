@@ -17,3 +17,8 @@
 FrontPage-Medium.ttf
 img
 build_simple.sh
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist

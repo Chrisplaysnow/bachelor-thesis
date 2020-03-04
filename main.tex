@@ -17,7 +17,7 @@
 
 \captionsetup[figure]{name=Figure}
 \captionsetup[table]{name=Table}
-        
+
 \renewcommand{\contentsname}{Table of contents}
 \tableofcontents	
 \newpage 
@@ -26,6 +26,10 @@
 \newpage
 \renewcommand{\listtablename}{List of tables}
 \listoftables
+\clearpage
+\renewcommand*{\glsgroupskip}{}
+\renewcommand{\glsnamefont}[1]{\normalfont{#1}}
+\printglossary[title=List of abbreviations,toctitle=List of abbreviations]
 \clearpage
 
 \setstretch{1.2}
