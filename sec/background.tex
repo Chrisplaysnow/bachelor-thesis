@@ -7,8 +7,21 @@ of this thesis are the examination of a state-of-the-art language model (LM) and
 human-like text on the one hand and methods to distinguish such generations from human written text on the other hand.
 In order to understand the problem and methodology used in this thesis, this chapter explains the foundations
 of NLP (ch.~\ref{sec:history_of_language_modeling}), especially the subpart of language
-modeling, and the foundations of deep learning (ch.~\ref{sec:deep_learning}) especially under the aspect of sequence
+modeling, and the foundations of deep learning (ch.~\ref{sec:deep_learning_in_machine_learning}) especially under the aspect of sequence
 classification.
+
+\subsection{Deep learning in machine learning}
+\label{sec:deep_learning_in_machine_learning}
+
+This section aims to firstly embed the field of deep learning, which is the current driver of the latest progress in the field of \textbf{natural language processing (NLP)}\footcite{Deng2018}, into machine learning. The first subsection (ch.~\ref{sub:definition}) will define machine learning and especially deep learning and will go over the most common terminology found in these fields. Afterwards (ch.~\ref{sub:neural_networks}), neural networks as the key concept for deep learning will be introduced. Later on (ch.~\ref{sub:recent_developments}) recent developments will be presented and the chapter will be concluded by giving an overview of practical applications of deep learning (ch.~\ref{sub:practical_applications}). The notation used throughout this chapter mostly follows the one used by Bishop~\footcite{bishop2006pattern} in his book “Pattern Recognition and Machine Learning“.
+
+\input{sec/deep-learning/definition.tex}
+
+\input{sec/deep-learning/neural_networks.tex}
+
+\input{sec/deep-learning/recent_developments.tex}
+
+\input{sec/deep-learning/practical_applications.tex}
 
 \subsection{History of language modeling}
 \label{sec:history_of_language_modeling}
@@ -31,8 +44,3 @@ follows the one from the CS224 Stanford Natural Language Processing with Deep Le
 \input{sec/history-of-lm/n-gram-models.tex}
 
 \input{sec/history-of-lm/neural-language-models.tex}
-
-\subsection{Deep Learning}
-\label{sec:deep_learning}
-
-This is deep learning.
