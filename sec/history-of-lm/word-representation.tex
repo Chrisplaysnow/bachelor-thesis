@@ -19,7 +19,7 @@ Here, our word vectors contain the knowledge that the difference between a “ki
 \end{figure}
 
 The most famous realization of these embeddings was introduced by the researchers of Google around Tomas Mikolov in their paper “Distributed Representations of Words and Phrases and their Compositionality“~\footcite{DBLP:journals/corr/MikolovSCCD13}. Hereafter, their proposed approach, Word2Vec, along with their used notation will briefly be presented, as its core ideas are found throughout other popular word embedding frameworks as well. \\
-Given a sequence of training words $ w_1, w_2, \dots, w_T $, the objective (ch 3.3.3 [HARDCODED, ref to objective function]) is to minimize the average negative log likelihood
+Given a sequence of training words $ w_1, w_2, \dots, w_T $, the objective (paragraph~\ref{par:cost_function}) is to minimize the average negative log likelihood
 \begin{equation}
 	\label{eqn:skip_gram_objective_function}
 	J(\theta) = - \frac{1}{T} \sum_{t=1}^{T} \sum_{\substack{-m \leq j \leq m \\ j \neq 0}} \text{log} \ P(w_{t+j} | w_t; \theta)
@@ -33,13 +33,3 @@ where we use two vectors per word $ w $: $ v_w $ when $ w $ is a center word and
 
 Even though word2vec embeddings are a powerful representation they do face certain limitations, which is why \textit{Stanford University}~\footnote{\url{https://www.stanford.edu}} took it upon itself to create an improved variant called GloVe~\footcite{pennington-etal-2014-glove}. While word2vec ignores that some context words appear more ofthen than others, GloVe stresses the importance of frequencies of co-occurrences and that these should not be “wasted“ as additional training examples. Therefore, GloVe builds word embeddings in a way that a combination of word vectors relates directly to the probability of these words' co-occurrence in the corpus. \\
 Another alternative to word2vec is \textit{fasttext} by Facebook, which generates word vectors that generalize better, need less training data and can be trained “on more than one billion words in less than ten minutes using a standard multicore CPU, and classify half a million sentences among 312K classes in less than a minute“ according to the authors~\footcite{DBLP:journals/corr/JoulinGBM16}. FastText also takes word parts into account, i.e. FastText not only stays on a word level of depth but also goes into the character level.
-
-
-
-
-
-
-
-
-
-
