@@ -1,0 +1,18 @@
+\subsubsection{Autoencoders and autoregressors}
+\label{sub:autoencoders_and_autoregressors}
+
+While most current \gls{lm}s are based on the transformer architecture they differ in their approach of predicting new tokens for the task of language modeling. Models like \gls{gpt2} make use of \textbf{\gls{ar}} language modeling while others employ \textbf{\gls{ae}} for language modeling.
+
+\begin{figure}
+	\includegraphics[height=4cm]{img/bayes_theorem}
+	\caption{Bayes' theorem: Posterior, likelihood, prior and evidence}
+	\label{fig:bayes_theorem}
+\end{figure}
+
+To understand these two concepts of prediction, one first needs to distinguish between generative and discriminative predictor models. While the complicated background to these approaches divides the research community (\textit{``bayesian vs. frequentist inference''}), one must hereof only understand that both have the same goal of predicting the class posterior probability of their input (figure~\ref{fig:bayes_theorem}). The actual calculation, however, is performed in two distinct ways. Generative predictor models try to understand the distribution of the underlying distribution of the data. Herefore, they estimate the likelihood $ P(D|\Theta) $ as well as the prior $ P(\Theta) $ and together with the evidence compute the class posterior probabilites. Discriminative predictor models learn their decision boundaries by directly computing the posterior from the training data and thus do not try to understand the underlying distribution. Discriminative modles are easier to learn in general because they do not need to learn the actual distibution of each class. Instead, they focus only on finding their differences. They are computationally less complex and therefore model less probabilities than generative ones.
+
+Generative models currently form the basis of natural language understanding and are responsible for recent research breakthroughs. Unsupervised representational learning methods, when pretrained with unlabeled coropora and then fine-tuned for downstream tasks, can be either implemented as \gls{ar} or \gls{ae} language modeling. To highlight the difference between these two, one can take a look at their way of predicting an unknown token in a sequence of text:
+\begin{equation}
+	\dots, x_{t-2}, x_{t-1}, x_{t, \text{prediction}}, x_{t+1}, x_{t+2}, \dots
+\end{equation}
+\gls{ar} language modeling (e.g. in \gls{gpt2}) can only predict new tokens in one direction. For the given token sequence of length $ T $ it computes the text probability as either a \textit{forward} $ p(x) = \prod_{t=1}^{T} p(x_t | x_{<t}) $ or \textit{backward} $ p(x) = \prod_{t=T}^{1} p(x_t | x_{>t}) $ product. This means that the foremost (or last) token is computed sequentially, taking the previously calculated tokens into account for the predicition at each step. In comparison, \gls{ae} based pretraining does not perform a density estimation, but instead aims to reconstruct the original data from \textit{masked} (hidden) inputs. Usually, some form of noise is inserted into the sequence and the model is trained to reconstruct the original sequence from the corrupted version. Since density estimation is not part of the goal, the \gls{ae} model may use the context to both sides (in the above sequence: $ \dots, x_{t-2}, x_{t-1} $ \textit{and} $ x_{t+1}, x_{t+2}, \dots $) for reconstruction. Nonetheless, the artificial noise inserted during the \gls{ae} pretraining usually is missing in the real data during the fine-tuning process. This commonly leads to a discrepancy between pretraining and fine-tuning. Unlike \gls{ar} models, \gls{ae} models cannot model the probability using the product rule.
