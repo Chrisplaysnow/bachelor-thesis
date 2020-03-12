@@ -1,14 +1,7 @@
 \section{Background}
 \label{ch:background}
 
-This chapter serves to explain the foundations of natural language processing (NLP), especially the subpart of
-language modeling, needed to understand the problem and methodology used in this thesis. The two main building blocks
-of this thesis are the examination of a state-of-the-art language model (LM) and its ability to generate high quality,
-human-like text on the one hand and methods to distinguish such generations from human written text on the other hand.
-In order to understand the problem and methodology used in this thesis, this chapter explains the foundations
-of NLP (ch.~\ref{sec:history_of_language_modeling}), especially the subpart of language
-modeling, and the foundations of deep learning (ch.~\ref{sec:deep_learning_in_machine_learning}) especially under the aspect of sequence
-classification.
+This chapter serves to explain the foundations of natural language processing (NLP), especially the subpart of language modeling, needed to understand the problem and methodology used in this thesis. The two main building blocks of this thesis are the examination of a state-of-the-art language model (LM) and its ability to generate high quality, human-like text on the one hand and methods to distinguish such generations from human written text on the other hand. In order to understand the problem and methodology used in this thesis, this chapter explains the foundations of NLP (ch.~\ref{sec:history_of_language_modeling}), especially the subpart of language modeling, and the foundations of deep learning (ch.~\ref{sec:deep_learning_in_machine_learning}) especially under the aspect of sequence classification.
 
 \subsection{Deep learning in machine learning}
 \label{sec:deep_learning_in_machine_learning}
@@ -26,16 +19,7 @@ This section aims to firstly embed the field of deep learning, which is the curr
 \subsection{History of language modeling}
 \label{sec:history_of_language_modeling}
 
-Natural language processing (NLP) is “an area of research and application that explores how computers can be used to
-understand and manipulate natural language text or speech to do useful things”~\footcite{doi:10.1002/aris.1440370103}.
-The applications of NLP such as speech recognition, sentiment analysis,
-question answering and others are numerous~\footcite{DBLP:journals/corr/GattK17}.
-Moreover, these applications are already being heavily used by industry and
-consumers alike e.g. in the forms of digital voice assistants, sentiment analysis for recommender systems
-and browser search bars~\footcite{8012330,10.1145/3064663.3064672,GoogleSearch}. The subcomponent of NLP
-needed when it comes to tasks like machine translation, predictive typing or summarization that involve either
-generating text or estimating the probability of text is called language modeling. The following notation mostly
-follows the one from the CS224 Stanford Natural Language Processing with Deep Learning lecutre by Chris Manning~\footnote{\url{https://web.stanford.edu/class/cs224n/index.html}}. The following chapters will cover word representation (ch.~\ref{sub:word_representation}) as the foundation for language models, followed by a brief explanation of the basics of language models (ch.~\ref{sub:foundations_of_language_modeling}) and will end with the most common and most used language model types and architectures (ch.~\ref{sub:n_gram_models} - ch.~\ref{sub:neural_language_models}).
+Natural language processing (NLP) is “an area of research and application that explores how computers can be used to understand and manipulate natural language text or speech to do useful things”~\footcite{doi:10.1002/aris.1440370103}. The applications of NLP such as speech recognition, sentiment analysis, question answering and others are numerous~\footcite{DBLP:journals/corr/GattK17}. Moreover, these applications are already being heavily used by industry and consumers alike e.g. in the forms of digital voice assistants, sentiment analysis for recommender systems and browser search bars~\footcite{8012330,10.1145/3064663.3064672,GoogleSearch}. The subcomponent of NLP needed when it comes to tasks like machine translation, predictive typing or summarization that involve either generating text or estimating the probability of text is called language modeling. The following notation mostly follows the one from the CS224 Stanford Natural Language Processing with Deep Learning lecutre by Chris Manning~\footnote{\url{https://web.stanford.edu/class/cs224n/index.html}}. The following chapters will cover word representation (ch.~\ref{sub:word_representation}) as the foundation for language models, followed by a brief explanation of the basics of language models (ch.~\ref{sub:foundations_of_language_modeling}) and will end with the most common and most used language model types and architectures (ch.~\ref{sub:n_gram_models} - ch.~\ref{sub:neural_language_models}).
 
 \input{sec/history-of-lm/word-representation.tex}
 
@@ -51,3 +35,11 @@ follows the one from the CS224 Stanford Natural Language Processing with Deep Le
 
 \subsection{Related Work}
 \label{sec:related_work}
+
+After having established necessary background knowledge and before heading into the methodolgy (ch.~\ref{ch:methodology}), this section examines related work to the detection of synthetically generated text. Because of the novelty of the problem the existing approaches are not only rare, but also vary significantly in their approaches to solve the problem as well as in their extensiveness - some are frameworks that merely formulate the detection of a language model output as a hypothesis testing problem while others provide out-of-the-box tools to be instantly used over text. The one thing that current research does have in common, is the pure focus on the text content to discriminate between genuine and generated text. Approaches that narrow down a domain and benchmark classification methods with the addition of domain-specific information (metadata) have not been published yet.
+
+\input{sec/related-work/gltr.tex}
+
+\input{sec/related-work/grover.tex}
+
+\input{sec/related-work/other_work.tex}

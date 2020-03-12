@@ -1,8 +1,7 @@
 \subsubsection{Attention and transformers}
 \label{sub:attention_and_transformers}
 
-In their paper `Attention is all you need'~\footcite{DBLP:journals/corr/VaswaniSPUJGKP17} Google researchers around Ashish Vaswani introduced a new architecture reliant solely on attention mechanisms, i.e. without any recurrence or convolution. Nonetheless, this `transformer' based architecture is superior in both quality and speed. Its structure allows for strong parallelization and thus requires significantly less time to train. Furthermore, transformers generalize well to other tasks, so that the same model can be utilized for multiple \gls{nlp} tasks.
-In the following self-attention and other shit will be presented which are important for the transformer architecture.
+In their paper `Attention is all you need'~\footcite{DBLP:journals/corr/VaswaniSPUJGKP17} Google researchers around Ashish Vaswani introduced a new architecture reliant solely on attention mechanisms, i.e. without any recurrence or convolution. Nonetheless, this `transformer' based architecture is superior in both quality and speed. Its structure allows for strong parallelization and thus requires significantly less time to train. Furthermore, transformers generalize well to other tasks, so that the same model can be utilized for multiple \gls{nlp} tasks. In this subsection, the main building blocks of the transformer architecture will be presented. As this architecture is fairely novel the amount of literature is very limited and the applied notation is heavily inspired by the original paper and by the blog post `Transformers from scratch'~\footnote{\url{http://www.peterbloem.nl/blog/transformers}}.
 
 \paragraph{Self-attention}
 Given are a sequence of input vectors $ \boldsymbol{x_1}, \boldsymbol{x_2}, \dots, \boldsymbol{x_t} $ and corresponding output vectors $ \boldsymbol{y_1}, \boldsymbol{y_2}, \dots, \boldsymbol{y_t} $, all of which have dimension $ k $. For the calculation of the output vector $ \boldsymbol{y_i} $, the self-attention mechanism takes a weighted average over all the input vectors
@@ -37,11 +36,6 @@ This separation grants the possibility to taylor the input vectors separately to
 	w'_{ij} = \frac{\boldsymbol{q}_i^T \boldsymbol{k}_j}{\sqrt{k}}
 \end{equation}
 Lastly, the authors found it beneficial to use multiple attention layers side by side to ``attend to information from different representation subspaces at different positions''~\footcite{DBLP:journals/corr/VaswaniSPUJGKP17}. This basically means that it is helpful to allow for a word to have different relations to different parts of the sentence. To account for this, several attention mechanisms (indexed by $ r $) called attention heads and with separate weight matrices $ \boldsymbol{W}_q^r, \boldsymbol{W}_k^r, \boldsymbol{W}_v^r $ are used (figure~\ref{fig:multi-head-attention}).
-% \begin{figure}
-% 	\includegraphics[height=8cm]{img/multi-head-attention}
-%   	\caption{Multi head attention}
-% 	\label{fig:multi-head-attention}
-% \end{figure}
 
 \paragraph{Architecture}
 \begin{figure}[h]
