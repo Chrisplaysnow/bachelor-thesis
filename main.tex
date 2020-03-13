@@ -2,6 +2,9 @@
 \bibliographystyle{jureco}
 \input{chapters/titelseite}
 
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
 \begin{document}
 \noindent
 \setstretch{1.2}
@@ -19,8 +22,6 @@
 \captionsetup[table]{name=Table}
 
 \renewcommand{\contentsname}{Table of contents}
-\setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{3}
 \tableofcontents	
 \newpage 
 \renewcommand{\listfigurename}{List of figures}
@@ -41,7 +42,7 @@
 
 \pagenumbering{arabic}
 
-\include{sec/intro}
+\include{sec/introduction}
 \include{sec/background}
 \include{sec/methodology}
 \include{sec/results}
