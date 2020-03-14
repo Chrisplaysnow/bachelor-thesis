@@ -35,7 +35,7 @@ Figure~\ref{fig:neural_network_architecture} shows the main components of the \g
 	\label{fig:neural_network_architecture}
 \end{figure}
 
-\paragraph*{Training process}
+\paragraph{Training process}\label{par:training_process}
 The actual tuning of the network's weights are not determined exactly, but are usually initialized randomly and iteratively optimized using training data via \textbf{forward propagation}. As this falls into the category of supervised learning, the desired outputs for the training inputs are known and thus a \textbf{cost} or \textbf{loss} function can be used to assess the discrepancy between prediction and ground truth. The calculated error can be used to determine the necessary updates on the weights to improve the predictions in a process called \textbf{backpropagation}. These steps will now be explained individually and in detail.
 
 \paragraph{Activation function}\label{par:activation_function}
@@ -74,7 +74,7 @@ One of the standard functions when it comes to classification is the cross-entro
 \end{equation}
 Cross entropy relies on probabilities and not just boolean values for class membership, therefore, it allows more precise performance evaluation. Abstractly, cross entropy between two probability distributions can be interpreted as the expected message-length per datum when a wrong distribution $ q $ is assumed while the data actually follows a distribution $ p $.
 
-\paragraph{Backpropagation}
+\paragraph{Backpropagation}\label{par:backprop}
 The process of calculating the activations at each hidden layer and the output layers as well as the resulting loss function is known as \textbf{forward propagation}. Now, to actually update the parameters of the neural network the \textit{contribution} of each parameter to the loss (gradient) needs to be computed and each parameter needs to be updated with gradient descent - this process is called \textbf{backpropagation}. The concept of gradient descent can be illustrated in a two dimensional setting by plotting the `landscape' of the loss function which one is trying to minimize - here the initial value can be seen as the start position of a `ball' that then starts to roll down until it reaches the bottom, or mathematically: the local minimum (figure~\ref{fig:gradient_descent}). The idea of backpropagation was introduced in the 1970s by Finnish master student Seppo Linnainmaa~\footcite{linnainmaa1970representation}. Here, instead of naively calculating the gradient of each layer separately the partial computations of the gradient for each layer are reused in the computation of the gradient for the previous layer. The backpropagation algorithm is dependent on the following 5 equations:
 
 The partial derivatives of the cost function are calculated by
