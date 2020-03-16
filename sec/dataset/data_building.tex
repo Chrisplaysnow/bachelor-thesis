@@ -8,15 +8,20 @@ Given the aforementioned parameter configurations, the first pipeline runs took 
 
 The creation of the data points was parallelized and the total time needed for the dataset creation was approximately 14 days. The data points and log files were stored daily in a Google Storage Bucket\footnote{\url{https://cloud.google.com/storage/docs/json_api/v1/buckets}} and could then be downloaded into a local machine for manual inspection.
 
-The finalized JSON format of a data point is shown in Listing~\ref{lst:data_json}. The key "\textit{label}" indicates whether the text entry was created by a human (0) or by GPT-2 (1).\\
+The finalized JSON format of a data point is shown in Listing~\ref{lst:data_json}. The key ``\textbf{meta}'' contains all the gathered information: \textit{Id} is the unique identifier of the article, \textit{input} denotes the input that was fed into \gls{gpt2} for generation, \textit{pageviews} tells us how many times the article was accessed during the last 60 days, \textit{touched} signifies the last time the article was edited, \textit{length} specifies the article's length in characters and \textit{categories} lists the more general \textit{categories} of the article. \\
+The key "\textbf{label}" indicates whether the text entry was created by a human (0) or by GPT-2 (1).\\
 
 \begin{lstlisting}[language=json,firstnumber=1,label={lst:data_json},caption={Example of a data point}]
 {
 	"meta": {
 		"id": "565318",
 		"input": "Lost in Space is a 1998 American science-fiction adventure",
-		"pageviews": 57062,
+		"pageviews": 38212,
 		"touched": "2020-02-26T06:53:05Z",
+		"length": 24134,
+		"categories": [
+			"Category:Films",
+		]
 	},
 	"label": 0,
 	"title": "Lost in Space (film)",
