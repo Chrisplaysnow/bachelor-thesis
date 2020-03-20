@@ -3,10 +3,10 @@
 
 The starting point for most NLP related tasks lies within the preprocessing of the textual input data. These must first be converted into a semantically meaningful numerical representation to allow for effective computation. The simplest way to represent a word numerically is by treating words as \textit{one-hot} vectors. Using this format, one word is encoded into an $ n $-dimensional vector of numbers where $ n $ is the vocabulary size and each entry takes on the value $ 0 $ except for the one that corresponds to the indexed word which takes on the value $ 1 $. This process generates very sparse feature vectors for each input word, which is no problem for simple classification tasks but is unsuitable for larger problems as the dimension size increases for each word added to the vocabulary. Another issue of one-hot vectors is the fact that these representations hold no notion of similarity: If we take a look at the representations for the words “plane“ and “airplane“ we would get two orthogonal vectors, just like any two vectors in the whole vocabulary. This poses a problem as every word's similarity to other words is the same and we can not encapsulate the meaning of the word. Yoav Goldberg writes in his primer on neural networks for language processing that one-hot vectors should only be considered for problems where the model has only a small amount of input features, the inputs do not have to share model parameters and where there is a lot of data to learn from~\footcite{DBLP:journals/corr/Goldberg15c}.
 
-Otherwise, the currently dominant approach in the field is to use word embeddings as feature vectors. Word embeddings follow the so-called “distributional semantics“, which state that a word's meaning is given by the words that tend to occur in a similar context. This idea of context-dependent nature of meaning was first introduced by English linguist J.R. Firth~\footnote{\url{https://web.stanford.edu/class/linguist236/materials/ling236-handout-05-09-vsm.pdf}} with the famous quote:
+Otherwise, the currently dominant approach in the field is to use word embeddings as feature vectors. Word embeddings follow the so-called “distributional semantics“, which state that a word's meaning is given by the words that tend to occur in a similar context. This idea of context-dependent nature of meaning was first introduced by English linguist J.R. Firth~\footcite[1]{firth1930stated} with the famous quote:
 
 \begin{quote}
-  You shall know a word by the company it keeps.
+  ``You shall know a word by the company it keeps.''
 \end{quote}
 
 Following this idea we represent each word by a distribution of weights across many dimensions. Now, instead of having a one-to-one mapping between an element in the vector and a word, the representation of a word is spread across all of the entries in the vector, and each element in the vector contributes to the definition of many words. Having this new form of word vectors allows us to capture meaningful semantic and syntactic regularities between words expressively. A simple way to illustrate this is depicted in figure~\ref{fig:word2vec_king_queen_composition}. \\
@@ -14,7 +14,7 @@ Here, our word vectors contain the knowledge that the difference between a “ki
 
 \begin{figure}[h]
   \includegraphics[height=5cm]{img/word2vec-king-queen-composition}
-  \caption{Word2vec king queen composition}
+  \caption[Word2vec king queen composition]{Word2vec king queen composition~\footnote{\url{https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/}}}
 \label{fig:word2vec_king_queen_composition}
 \end{figure}
 
