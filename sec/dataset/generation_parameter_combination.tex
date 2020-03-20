@@ -19,43 +19,51 @@ number of beams & 5 & 7 &  \\ \hline
 \label{tab:parameter_combinations}
 \end{table}
 
-In order to determine a parameter combination that generates convincing text all possible permutations between the parameters given the values listed in table~\ref{tab:parameter_combinations} were used to generate samples for 50 articles. As a metric for evaluation a fine-tuned large (1.5GB weights size as a .pt file) RoBERTa-based model with a mixture of temperature 1 and nucleus sampling outputs was chosen. This configuration was elected as it generalizes well to outputs generated using different sampling methods [citation gpt2 paper]. On top of that, human evaluation was performed while reading through samples created by the best performing parameter combinations according to the RoBERTa evaluation. \\
-The main findings were that a higher repetition penalty, as well as shorter output length, were key factors for better text generation. In addition to that, feeding the LM word-split input sentences as opposed to character-split input sequences also improved quality (table~\ref{tab:word_vs_char_split}).
+In order to determine a parameter combination that generates convincing text all possible permutations between the parameters given the values listed in table~\ref{tab:parameter_combinations} were used to generate samples for 50 articles. As a metric for evaluation a fine-tuned large (1.5GB sized weights file) RoBERTa-based model with a mixture of temperature 1 and nucleus sampling outputs was chosen. On top of that, human evaluation was performed while reading through samples created by the best performing parameter combinations according to the RoBERTa evaluation. The main findings were that a higher repetition penalty, as well as shorter output length, were key factors for better text generation. In addition to that, feeding the LM word-split input sentences as opposed to character-split input sequences also improved quality (table~\ref{tab:word_vs_char_split}). The finally selected parameter values are listed below.
 
 \begin{table}
 	% \centering
-		\begin{tabular}{ | l | p{14cm} | }
-		\multicolumn{2}{c}{character split input} \\
-		\hline
+		\begin{tabular}{ l | p{14cm} }
+		% \multicolumn{2}{c}{character split input} \\
 		Input & tennis is a spo \\ \hline
   		Output & tennis is a spoilt brat by all accounts, but can he work with the likes of Krajicek? Can he become a player on the big stage who can keep his cool with the big boys? \\
-		\hline
   		\multicolumn{2}{c}{} \\
-  		\multicolumn{2}{c}{word split input} \\
-  		\hline			
+  		% \multicolumn{2}{c}{word split input} \\	
   		Input & tennis is a sport \\ \hline
   		Output & tennis is a sport which requires a lot of energy and runs at a very fast pace. Getting tired can really impair your performance. \\
-  		\hline
 	\end{tabular}
 	\caption{Exemplary word and character split inputs and according outputs} \label{tab:word_vs_char_split}
 \end{table}
 
-Thus, the finally selected parameter values were:
+\begin{itemize}
+	\item Maximum Input Length: 60 characters \\
+	The input that was fed into GPT-2 was the first sequence of plain text in a Wikipedia article, i.e. no infobox or content table text was considered. Additionally, before feeding the 60 character String into the LM it was split at the last word. This was done because the quality of the generated output tended to increase when the input was given in full words rather than in characters and thus having many times split words.
+	\item Maximum Output Length: 50 Tokens \\
+	This corresponds to an average of about 240 - 260 characters per text (in comparison: the maximum tweet length is 280 characters). As this is a size that occurs a lot especially in social media or breaking news headlines (with the subtitle)~\footcite{lee2014proven}, the focus was placed on shorter text snippets. Also, the amount of needed computing power increased in a linear fashion with the output length, which would have doubled or quadrupled the dataset creation time of 14 days.
+	\item Temperature: 1.0 \\
+	Both lowering and increasing (to 0.7 and 1.3) the temperature led to increased detection of synthetically generated text, which is why the temperature was left at its original value.
+	\item Repetition Penalty: 1.3 \\
+	As repetitions were not desired in the generated output the repetition penalty was increased from its default value of 1.0 to 1.3 under the assumption that most Wikipedia articles do not contain repetitions (especially in their abstracts) unlike for instance dramatic text, where text repetition can be used as a stylistic device.
+	\item Sampling method: Beam search (3) with $ k = 1 $ \\
+	The beam search algorithm for decoding of the LM output was chosen as the best fit. Initially thought of as a parameter that would have a big impact on the quality of the generated text, it was found out that altering the number of beams used in the beam sampling strategy when predicting the next most probable tokens was had only little impact on the LM text generation. The values chosen ranged between 5 and 10 as this is currently the de facto standard~\footcite{DBLP:journals/corr/FreitagA17} in research.
+\end{itemize}
 
-Maximum Input Length - 60 characters \\
-The input that was fed into GPT-2 XL was the first sequence of plain text in a Wikipedia article, i.e. no infobox or content table text was considered. Additionally, before feeding the 60 character String into the LM it was split at the last word. This was done because the quality of the generated output tended to increase when the input was given in full words rather than in characters and thus having many times split words.
+To finalize the dataset creation, synthetic text had to be generated for each article's first 60 characters \textit{twice}. The double generation was performed in order to select the sample that \gls{gpt2} felt more confident about and improve the dataset quality. The finalized JSON format of a data point is shown in Listing~\ref{lst:data_json}. The key ``\textbf{meta}'' contains all the gathered information: \textit{Id} is the unique identifier of the article, \textit{input} denotes the input that was fed into \gls{gpt2} for generation, \textit{pageviews} tells us how many times the article was accessed during the last 60 days, \textit{touched} signifies the last time the article was edited, \textit{length} specifies the article's length in characters and \textit{categories} lists the more general \textit{categories} of the article. The key "\textbf{label}" indicates whether the text entry was created by a human (0) or by GPT-2 (1).
 
-Maximum Output Length - 50 Tokens \\
-This corresponds to an average of about 240 - 260 characters per text (in comparison: the max tweet length is 280 characters). As this is a size that occurs a lot especially in social media or breaking news headlines (with the subtitle)~\footcite{lee2014proven}, the focus was placed on shorter text snippets. Also, the amount of needed computing power increased in a linear fashion with the output length, which would have doubled or quadrupled the dataset creation time of 14 days. 
-
-Temperature - 1.0 \\
-Both lowering and increasing (to 0.7 and 1.3) the temperature led to increased detection of synthetically generated text, which is why the temperature was left at its original value.
-
-Repetition Penalty - 1.3 \\
-As repetitions were not desired in the generated output the repetition penalty was increased from its default value of 1.0 to 1.3. under the assumption that most Wikipedia articles do not contain repetitions (especially in their abstracts) unlike for instance dramatic text, where text repetition can be used as a stylistic device.
-
-Sampling method - beam search (3) \\
-The beam search algorithm for decoding of the LM output was chosen as the best fit.
-
-Number of beams - 5 \\
-Initially thought of as a parameter that would have a big impact on the quality of the generated text, it was found out that altering the number of beams used in the beam sampling strategy when predicting the next most probable tokens was had only little impact on the LM text generation. The values chosen ranged between 5 and 10 as this is currently the de facto standard [cite Stanford lectures] in research.
+\begin{lstlisting}[language=json,firstnumber=1,label={lst:data_json},caption={Example of a data point}]
+{
+	"meta": {
+		"id": "565318",
+		"input": "Lost in Space is a 1998 American science-fiction adventure",
+		"pageviews": 38212,
+		"touched": "2020-02-26T06:53:05Z",
+		"length": 24134,
+		"categories": [
+			"Category:Films",
+		]
+	},
+	"label": 0,
+	"title": "Lost in Space (film)",
+	"text": "Lost in Space is a 1998 American science-fiction adventure film directed by Stephen Hopkins, and starring William Hurt, Matt LeBlanc, and Gary Oldman. The plot is adapted from the 1965-1968 CBS television series \"of the same name\". Seve"
+}
+\end{lstlisting}
