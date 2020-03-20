@@ -1,14 +1,14 @@
 \subsubsection{Neural networks}
 \label{sub:neural_networks}
 
-The origins of the term \textit{\gls{nn}} lie in the attempt to find mathematical representations of information processing in biological systems such as the human brain where the sheets of tissue may be understood as vectors of neurons. While assuming biological realism in pattern recognition is impractical and imposes too many unnecessary constraints, \gls{nn}s have proven to be capable of solving complex problems. The main reason for this is being able to get rid of the task of feature selection. Before the rise of \gls{nn}s, scientists and researchers had to complete the laborious task of coming up with good features to solve learning problems. Their structure enables the learning of useful representations of the input data by creating complex data representations through the combination of simpler ones. The most simple and also most successful model of this type is known as the (three layered) \textbf{\gls{mlp}} (in the following simply denoted as \gls{nn}), which will now shortly be presented. Later on (subsection~\ref{sub:neural_language_models}), more complex neural network architectures will be presented especially under the aspect of their aptitude for \gls{nlp}tasks.
+The origins of the term \textit{\gls{nn}} lie in the attempt to find mathematical representations of information processing in biological systems such as the human brain where the sheets of tissue may be understood as vectors of neurons. While assuming biological realism in pattern recognition is impractical and imposes too many unnecessary constraints, \gls{nn}s have proven to be capable of solving complex problems. The main reason for this is being able to get rid of the task of feature selection. Before the rise of \gls{nn}s, scientists and researchers had to complete the laborious task of coming up with good features to solve learning problems. Their structure enables the learning of useful representations of the input data by creating complex data representations through the combination of simpler ones. The most simple and also most successful model of this type is known as the (three layered) \textbf{\gls{mlp}} (in the following simply denoted as \gls{nn}), which will now shortly be presented. Later on (subsection~\ref{sub:neural_language_models}), more complex neural network architectures will be presented especially under the aspect of their aptitude for \gls{nlp} tasks.
 
-A typical linear model for regression or classification is based on linear combinations of fixed nonlinear basis functions $ \phi_j (\pmb{x}) $ and takes on the form
+A typical linear model for regression or classification is based on linear combinations of fixed nonlinear basis functions $ \phi_j (\boldsymbol{x}) $ and takes on the form
 \begin{equation}
 	\label{eq:lin_comb_of_nonlinear_basis_func}
-	y(\pmb{x}, \pmb{w}) = f \left( \sum_{j=1}^{M} w_j \phi_j (\pmb{x}) \right)
+	y(\boldsymbol{x}, \boldsymbol{w}) = f \left( \sum_{j=1}^{M} w_j \phi_j (\boldsymbol{x}) \right)
 \end{equation}
-where $ f(\cdot) $ is a nonlinear activation function. How \gls{nn}s extend this model is by making the basis functions $ \phi_j(\pmb{x}) $ depend on the parameters and then allow these parameters to be adjusted, along with the coefficients $  \{w_j\} $ during training. This gives us a basic \gls{nn} that can be described as a series of functional transformations. First, $ M $ linear combinations of the input variables $ x_1, \dots, x_D $ in the form
+where $ f(\cdot) $ is a nonlinear activation function. How \gls{nn}s extend this model is by making the basis functions $ \phi_j(\boldsymbol{x}) $ depend on the parameters and then allow these parameters to be adjusted, along with the coefficients $  \{w_j\} $ during training. This gives us a basic \gls{nn} that can be described as a series of functional transformations. First, $ M $ linear combinations of the input variables $ x_1, \dots, x_D $ in the form
 \begin{equation}
 	a_j = \sum_{i=1}^{D} w_{ji}^{(1)} x_i + w_{j0}^{(1)}
 \end{equation}
@@ -24,7 +24,7 @@ These quantities are called the \textit{hidden units}. The introduction of non-l
 where $ k = 1, \dots, K $ and $ K $ is the total number of outputs. Equation~\ref{eq:output_unit_activation} represents the second layer of the network. Finally, the output unit activations are transformed using an appropriate activation function to give a set of network ouputs $ y_k $. \\
 Now, we can combine these various stages to give the overall network function that takes the form
 \begin{equation}
-	y_k(\pmb{x}, \pmb{w}) = f \left( \sum_{j=1}^{M} w_{kj}^{(2)} h \left( \frac{1}{2} \right) + w_{k0}^{(2)} \right)
+	y_k(\boldsymbol{x}, \boldsymbol{w}) = f \left( \sum_{j=1}^{M} w_{kj}^{(2)} h \left( \frac{1}{2} \right) + w_{k0}^{(2)} \right)
 \end{equation}
 Thus the neural network model is simply a nonlinear function from a set of input variables $ \{x_i\} $ to a set of output variables $ \{y_k\} $ controlled by a vector $ w $ of adjustable parameters.
 
@@ -70,7 +70,7 @@ A simple implementation of the cost function is the \textbf{\gls{mse}} loss, whi
 \end{equation}
 One of the standard functions when it comes to classification is the cross-entropy loss function that calculates on step $ t $ the cross-entropy between predicted probability distribution $ \hat{y}^{(t)} $, and the truth $ y^{(t)} $
 \begin{equation}
-	J^{(t)}(\theta) = \text{CE}(\pmb{y}^{(t)}, \hat{\pmb{y}}^{(t)}) = - \sum_{w \in V} \pmb{y}_w^{(t)} \ \text{log} \ \hat{\pmb{y}}_w^{(t)} = - \text{log} \ \hat{\pmb{y}}_{\pmb{x}_{t+1}}^{(t)}
+	J^{(t)}(\theta) = \text{CE}(\boldsymbol{y}^{(t)}, \hat{\boldsymbol{y}}^{(t)}) = - \sum_{w \in V} \boldsymbol{y}_w^{(t)} \ \text{log} \ \hat{\boldsymbol{y}}_w^{(t)} = - \text{log} \ \hat{\boldsymbol{y}}_{\boldsymbol{x}_{t+1}}^{(t)}
 \end{equation}
 Cross entropy relies on probabilities and not just boolean values for class membership, therefore, it allows more precise performance evaluation. Abstractly, cross entropy between two probability distributions can be interpreted as the expected message-length per datum when a wrong distribution $ q $ is assumed while the data actually follows a distribution $ p $.
 
@@ -95,7 +95,7 @@ and on the hidden layers' loss terms
 Combination of the partial derivatives for each input-output pair are takes places like so
 \begin{equation}
 	\label{eq:backprop_four}
-	\frac{\delta J(X, \theta)}{\delta w_{ij}^k} = \frac{1}{N} \sum_{d=1}^{N} \frac{\delta}{\delta w_{ij}^{k}} \left( \frac{1}{2} (\pmb{\hat{y}_d} - \pmb{y_d})^2 \right) = \frac{1}{N} \sum_{d=1}^{N} \frac{\delta J_d}{\delta w_{ij}^k}
+	\frac{\delta J(X, \theta)}{\delta w_{ij}^k} = \frac{1}{N} \sum_{d=1}^{N} \frac{\delta}{\delta w_{ij}^{k}} \left( \frac{1}{2} (\boldsymbol{\hat{y}_d} - \boldsymbol{y_d})^2 \right) = \frac{1}{N} \sum_{d=1}^{N} \frac{\delta J_d}{\delta w_{ij}^k}
 \end{equation}
 As for updating the weights, one uses
 \begin{equation}
@@ -104,8 +104,8 @@ As for updating the weights, one uses
 \end{equation}
 In the following the simplest form of backpropagation with simple \textit{gradient descent} will be presented.
 \begin{enumerate}
-	\item Firstly, the forward propagation for each input-output pair $ \pmb{x_d}, \pmb{y_d} $ has to be computed. The results $ \pmb{\hat{y}_d} $, $ \pmb{a_j^k} $ and $ o_j^k $ for each node $ j $ are then stored in layer $ k $ by proceeding from input layer $ 0 $ to the output layer $ m $.
-	\item Secondly, the backward phase for each input-output pair $ \pmb{x_d}, \pmb{y_d} $ is calculated and the results $ \frac{\partial J_d}{\partial w_{ij}^{k}} $ for each weight $ w_{ij}^{k} $ connecting node $ i $ in layer $ k - 1 $ to node $ j $ in the next layer are stored starting now on the last layer $ m $ and continuing until layer $ 1 $. This step can be further split up into 3 sub-steps:
+	\item Firstly, the forward propagation for each input-output pair $ \boldsymbol{x_d}, \boldsymbol{y_d} $ has to be computed. The results $ \boldsymbol{\hat{y}_d} $, $ \boldsymbol{a_j^k} $ and $ o_j^k $ for each node $ j $ are then stored in layer $ k $ by proceeding from input layer $ 0 $ to the output layer $ m $.
+	\item Secondly, the backward phase for each input-output pair $ \boldsymbol{x_d}, \boldsymbol{y_d} $ is calculated and the results $ \frac{\partial J_d}{\partial w_{ij}^{k}} $ for each weight $ w_{ij}^{k} $ connecting node $ i $ in layer $ k - 1 $ to node $ j $ in the next layer are stored starting now on the last layer $ m $ and continuing until layer $ 1 $. This step can be further split up into 3 sub-steps:
 	\begin{enumerate}
 		\item The term $ \delta_1^m $ is calculated by using equation~\ref{eq:backprop_two}.
 		\item The calculated loss terms for the hidden layers $ \delta_j^k $ are backpropagated starting on layer $ k = m - 1 $ through repetitive usage of equation~\ref{eq:backprop_three}.
@@ -118,7 +118,7 @@ In the following the simplest form of backpropagation with simple \textit{gradie
 
 \begin{figure}
 	\includegraphics[height=4cm]{img/gradient_descent}
-	\caption{Gradient descent on a convex quadratic function}
+	\caption[Gradient descent on a convex quadratic function]{Gradient descent on a convex quadratic function~\footnote{\url{https://www.topcoder.com/gradient-descent-in-machine-learning/}}}
 	\label{fig:gradient_descent}
 \end{figure}
 
